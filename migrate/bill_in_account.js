@@ -13,11 +13,21 @@ var User = require('../app/models/user')
 
 // console.log(User)
 
-User.findAll().then(function(users) {
-  // console.log(users)
+User.sync({force: true}).then(function () {
+  // Table created
+  return User.create({
+    username: 'John',
+    password: 'Hancock'
+  });
+}).then(function(){
+  return User.findAll().then(function(users) {
+    // console.log(users)
   
-  users.forEach(function(user){
-    console.log(user.get('firstName'))
+    users.forEach(function(user){
+      console.log(user.get('username'))
     
+    })
   })
 })
+
+
