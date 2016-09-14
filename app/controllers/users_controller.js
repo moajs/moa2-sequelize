@@ -142,9 +142,9 @@ exports.destroy = (ctx, next) => {
 // -- custom api
 exports.api = {
   list: (ctx, next) => {
-    var user_id = ctx.api_user._id;
+    var user_id = ctx.api_user.id;
 
-    return User.queryAsync({}).then((users) => {
+    return User.findAll().then(( users)=>{
       return ctx.api({
         users : users
       })
@@ -153,10 +153,14 @@ exports.api = {
     });
   },
   show: (ctx, next) => {
-    var user_id = ctx.api_user._id;
+    var user_id = ctx.api_user.id;
     var id = ctx.params.user_id;
 
-    return User.getByIdAsync(id).then((user)=>{
+    return User.findOne({
+      where: {
+        id: id
+      }
+    }).then((user)=>{
       return ctx.api({
         user : user
       });
@@ -165,9 +169,9 @@ exports.api = {
     });
   },
   create: (ctx, next) => {
-    var user_id = ctx.api_user._id;
+    var user_id = ctx.api_user.id;
 
-    return User.createAsync({username: ctx.request.body.username,password: ctx.request.body.password,avatar: ctx.request.body.avatar,phone_number: ctx.request.body.phone_number,address: ctx.request.body.address}).then(user=> {
+    return User.create({username: ctx.request.body.username,password: ctx.request.body.password,avatar: ctx.request.body.avatar,phone_number: ctx.request.body.phone_number,address: ctx.request.body.address}).then( user => {
       return ctx.body = ({
         user : user
       })
@@ -177,9 +181,15 @@ exports.api = {
 
   },
   update: (ctx, next) => {
-    var user_id = ctx.api_user._id;
+    var user_id = ctx.api_user.id;
     var id = ctx.params.user_id;
-    return User.updateByIdAsync(id, {username: ctx.request.body.username,password: ctx.request.body.password,avatar: ctx.request.body.avatar,phone_number: ctx.request.body.phone_number,address: ctx.request.body.address}).then(user=> {
+    return User.findOne({
+    where: {
+      id: id
+    }
+  }).then( user => {
+    return user.update({username: ctx.request.body.username,password: ctx.request.body.password,avatar: ctx.request.body.avatar,phone_number: ctx.request.body.phone_number,address: ctx.request.body.address})
+  }).then(user=> {
       return ctx.api({
         user : user,
         redirect : '/users/' + id
@@ -189,10 +199,14 @@ exports.api = {
     });
   },
   delete: (ctx, next) => {
-    var user_id = ctx.api_user._id;
+    var user_id = ctx.api_user.id;
     var id = ctx.params.user_id;
 
-    return User.deleteByIdAsync(id).then(function(){
+    return User.destroy({
+      where: {
+        id: id
+      }
+    }).then(function(){
       return ctx.api({id: id})
     }).catch((err)=>{
       return ctx.api_error(err);
