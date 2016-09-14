@@ -16,6 +16,7 @@
     "co": "^4.6.0",
     "debug": "^2.2.0",
     "moa2": "^2",
+    "mysql": "^2.11.1",
     "sequelize": "^3.24.3"
   },
   "devDependencies": {
