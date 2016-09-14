@@ -27,5 +27,7 @@ var User = connection.define('user', {
 //     lastName: 'Hancock'
 //   });
 // });
+
+console.log(User)
  
 module.exports = User;

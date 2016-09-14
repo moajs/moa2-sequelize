@@ -14,8 +14,11 @@ module.exports = {
   database: {
     // dialect 'mysql'|'mariadb'|'sqlite'|'postgres'|'mssql'
     "development": {
-       "dialect": "sqlite",
-       "storage": "./db.development.sqlite"
+       "username": "root",
+       "password": null,
+       "database": "database_development",
+       "host": "127.0.0.1",
+       "dialect": "mysql"
      },
      "test": {
        "username": "root",
