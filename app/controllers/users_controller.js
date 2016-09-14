@@ -10,7 +10,8 @@ var User = $models.user;
 exports.list = (ctx, next) => {
   console.log(ctx.method + ' /users => list, query: ' + JSON.stringify(ctx.query));
 
-  return User.getAllAsync().then(( users)=>{
+  return User.findAll().then(( users)=>{
+    console.log(users)
     return ctx.render('users/index', {
       users : users
     })
@@ -34,7 +35,11 @@ exports.show = (ctx, next) => {
     ', params: ' + JSON.stringify(ctx.params));
   var id = ctx.params.id;
 
-  return User.getByIdAsync(id).then( user => {
+  return User.findOne({
+    where: {
+      id: id
+    }
+  }).then( user => {
     console.log(user);
     return ctx.render('users/show', {
       user : user
@@ -50,7 +55,11 @@ exports.edit = (ctx, next) => {
 
   var id = ctx.params.id;
 
-  return User.getByIdAsync(id).then( user => {
+  return User.findOne({
+    where: {
+      id: id
+    }
+  }).then( user => {
     console.log(user);
     user._action = 'edit';
 
@@ -66,7 +75,8 @@ exports.create = (ctx, next) => {
   console.log(ctx.method + ' /users => create, query: ' + JSON.stringify(ctx.query) +
     ', params: ' + JSON.stringify(ctx.params) + ', body: ' + JSON.stringify(ctx.request.body));
 
-  return User.createAsync({username: ctx.request.body.username,password: ctx.request.body.password,avatar: ctx.request.body.avatar,phone_number: ctx.request.body.phone_number,address: ctx.request.body.address}).then( user => {
+  return User.create({username: ctx.request.body.username,password: ctx.request.body.password,avatar: ctx.request.body.avatar,phone_number: ctx.request.body.phone_number,address: ctx.request.body.address}).then( user => {
+    console.log(user)
     return ctx.render('users/show', {
       user : user
     })
@@ -79,28 +89,42 @@ exports.update = (ctx, next) => {
   console.log(ctx.method + ' /users/:id => update, query: ' + JSON.stringify(ctx.query) +
     ', params: ' + JSON.stringify(ctx.params) + ', body: ' + JSON.stringify(ctx.request.body));
 
-    var id = ctx.params.id;
+  var id = ctx.params.id;
 
-    return User.updateById(id,{username: ctx.request.body.username,password: ctx.request.body.password,avatar: ctx.request.body.avatar,phone_number: ctx.request.body.phone_number,address: ctx.request.body.address}).then( user => {
-      console.log(user);
+  return User.findOne({
+    where: {
+      id: id
+    }
+  }).then( user => {
+    return user.update({username: ctx.request.body.username,password: ctx.request.body.password,avatar: ctx.request.body.avatar,phone_number: ctx.request.body.phone_number,address: ctx.request.body.address})
+  }).then( user => {
+    console.log(user);
 
-      return ctx.body = ({
-        data:{
-          redirect : '/users/' + id
-        },
-        status:{
-          code : 0,
-          msg  : 'delete success!'
-        }
-      });
+    return ctx.body = ({
+      data:{
+        redirect : '/users/' + id
+      },
+      status:{
+        code : 0,
+        msg  : 'delete success!'
+      }
     });
+  }).catch((err)=>{
+      return ctx.api_error(err);
+  });
+  
 };
 
 exports.destroy = (ctx, next) => {
   console.log(ctx.method + ' /users/:id => destroy, query: ' + JSON.stringify(ctx.query) +
     ', params: ' + JSON.stringify(ctx.params) + ', body: ' + JSON.stringify(ctx.request.body));
   var id = ctx.params.id;
-  return User.deleteByIdAsync(id).then( () =>{
+
+  return User.destroy({
+      where: {
+        id: id
+      }
+  }).then( () =>{
     return ctx.body= ({
       data:{},
       status:{

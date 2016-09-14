@@ -20,7 +20,6 @@
     "sequelize": "^3.24.3"
   },
   "devDependencies": {
-    "mount-models": "^1.0.8",
     "nodemon": "^1.10.2"
   }
 }
