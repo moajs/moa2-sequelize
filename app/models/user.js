@@ -1,6 +1,8 @@
 "use strict";
 
-const Sequelize = require('sequelize')
+var T = require("toshihiko");
+
+const Toshihiko = require('toshihiko')
 
 /**
  * Created by alfred on June 8th 2016, 8:57:06 pm.
@@ -8,25 +10,30 @@ const Sequelize = require('sequelize')
 
 var connection = require('../../db')
 
-var User = connection.define('user', {
-  username: {
-    type: Sequelize.STRING
+
+var User = connection.define('user', [
+  { name: "id", column: "id", primaryKey: true, type: Toshihiko.Type.Integer, autoIncrement: true },
+  {
+    name: 'username', 
+    type: Toshihiko.Type.String
   },
-  password: {
-    type: Sequelize.STRING
+   {
+    name: 'password', 
+    type: Toshihiko.Type.String
   },
-  avatar: {
-    type: Sequelize.STRING
+   {
+    name: 'avatar', 
+    type: Toshihiko.Type.String
   },
-  phone_number: {
-    type: Sequelize.STRING
+   {
+    name: 'phone_number', 
+    type: Toshihiko.Type.String
   },
-  address: {
-    type: Sequelize.STRING
+  {
+    name: 'address', 
+    type: Toshihiko.Type.String
   }
-}, {
-  freezeTableName: true // Model tableName will be the same as the model name
-});
+]);
 
 console.log(User)
  
