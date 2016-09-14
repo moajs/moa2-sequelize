@@ -3,7 +3,7 @@
 Moa2 v2 with sequelize（for rdbms）
 
 - 支持Koa 2.x所有中间件写法
-- 支持soag生成器（不可用）
+- 支持soag生成器
 - 采用Rails-like目录结构
 
 ## 生成器用法
