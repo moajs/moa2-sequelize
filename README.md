@@ -3,31 +3,31 @@
 Moa2 v2 with sequelize（for rdbms）
 
 - 支持Koa 2.x所有中间件写法
-- 支持soag生成器
+- 支持toag生成器
 - 采用Rails-like目录结构
 
 ## 生成器用法
 
 ```
-npm i -g soag
+npm i -g toag
 ```
 
 ### 方式1：生成promise-based中间件(common function)
 
 ```
-soag book name:string coordinates:string -k -c
+toag book name:string coordinates:string -k -c
 ```
 
 ### 方式2：生成generator-based中间件
 
 ```
-soag cup name:string coordinates:string -k -g
+toag cup name:string coordinates:string -k -g
 ```
 
 ### 方式3：生成async-based中间件(需要runkoa或babel)
 
 ```
-soag beer name:string coordinates:string -k -a
+toag beer name:string coordinates:string -k -a
 ```
 
 此种情况下，请使用runkoa作为启动
