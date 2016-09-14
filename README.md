@@ -1,12 +1,12 @@
-# Moa2mongo
+# Moa2sequelize
 
-Moa2 v2 with mongodb
+Moa2 v2 with sequelize（for rdbms）
 
 - 支持Koa 2.x所有中间件写法
-- 支持moag生成器
+- 支持moag生成器（不可用）
 - 采用Rails-like目录结构
 
-## 生成器用法
+## 生成器用法（不可用）
 
 ```
 npm i -g moag@2
