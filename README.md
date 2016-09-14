@@ -1,6 +1,6 @@
-# Moa2sequelize
+# Moa2toshihiko
 
-Moa2 v2 with sequelize（for rdbms）
+Moa2 v2 with toshihiko（for mysql）
 
 - 支持Koa 2.x所有中间件写法
 - 支持toag生成器
