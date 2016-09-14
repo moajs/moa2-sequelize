@@ -13,11 +13,11 @@ var User = require('../app/models/user')
 
 // console.log(User)
 
-User.find({}, function (err, docs) {
-  if (err) {
-    console.log(err)
-  }
-  console.dir('docs')
-  console.dir(docs)
-  // process.exit()
+User.findAll().then(function(users) {
+  // console.log(users)
+  
+  users.forEach(function(user){
+    console.log(user.get('firstName'))
+    
+  })
 })
