@@ -14,23 +14,23 @@ module.exports = {
   database: {
     // dialect 'mysql'|'mariadb'|'sqlite'|'postgres'|'mssql'
     "development": {
-       "username": "root",
-       "password": null,
-       "database": "database_development",
+       "username": "i5ting",
+       "password": "000000",
+       "database": "moajs",
        "host": "127.0.0.1",
        "dialect": "mysql"
      },
      "test": {
-       "username": "root",
-       "password": null,
-       "database": "database_test",
+       "username": "i5ting",
+       "password": "000000",
+       "database": "moajs",
        "host": "127.0.0.1",
        "dialect": "mysql"
      },
      "production": {
-       "username": "root",
-       "password": null,
-       "database": "database_production",
+       "username": "i5ting",
+       "password": "000000",
+       "database": "moajs",
        "host": "127.0.0.1",
        "dialect": "mysql"
      }
